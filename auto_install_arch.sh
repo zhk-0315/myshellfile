@@ -23,7 +23,7 @@ else
     mount $windisk /mnt/win
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
-echo '\n\n\n\n\n' | pacman -S xorg-server xorg-xinit xorg-apps ttf-sarasa-gothic
+echo '\n\n\n\n\n' | pacman -S xorg ttf-sarasa-gothic
 systemctl enable NetworkManager 
 read "your wants desktops only support: \n1xfce\n2kde\n3gnome\n": desktop
 if [ desktop == 1 ];then
