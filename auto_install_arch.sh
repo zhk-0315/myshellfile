@@ -22,9 +22,18 @@ else
     mount $windisk /mnt/win
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
-echo '\n\n\n\n\n' | pacman -S xorg-server xorg-xinit xorg-apps lightdm lightdm-gtk-greeter xfce4 xfce4-goodies ttf-sarasa-gothic nvidia nvidia-utils
+echo '\n\n\n\n\n' | pacman -S xorg-server xorg-xinit xorg-apps ttf-sarasa-gothic nvidia nvidia-utils
 systemctl enable NetworkManager 
-systemctl enable lightdm
+read "your wants desktops": desktop
+if [ desktop == xfce ];then
+    pacman -S lightdm lightdm-gtk-greeter xfce4 xfce4-goodies 
+    systemctl enable lightdm
+elif [desktop == kde];then
+    pacman -S 
+elif
+
+
+
 passwd
 useradd -mG wheel zhang
 passwd zhang
