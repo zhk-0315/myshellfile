@@ -26,13 +26,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo '\n\n\n\n\n' | pacman -S xorg ttf-sarasa-gothic
 systemctl enable NetworkManager 
 read "your wants desktops only support: \n1xfce\n2kde\n3gnome\n": desktop
-if [ desktop == 1 ];then
+if [ $desktop == 1 ];then
     pacman -S lightdm lightdm-gtk-greeter xfce4 xfce4-goodies 
     systemctl enable lightdm
-elif [desktop == 2];then
+elif [ $desktop == 2 ];then
     pacman -S sddm plasma kde-applications packagekit-qt5
     systemctl enable sddm
-elif [ desktop == 3 ];then
+elif [ $desktop == 3 ];then
     pacman -S gdm gnome
     systemctl enable gdm
 else 
