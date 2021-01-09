@@ -1,6 +1,6 @@
 #! /bin/bash
 rm -r ~/.vim
-mkdir ~/.vim
+mkdir ~/.vim ~/.vim_plug ~/.vim_plug/plugged
 cd ~/.vim
 echo "init git dir"
 git init
