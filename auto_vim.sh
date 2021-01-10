@@ -1,7 +1,11 @@
 #! /bin/bash
-rm -r ~/.vim
-mkdir ~/.vim ~/.vim_plug ~/.vim_plug/plugged
-cd ~/.vim
+if [ ! -d $HOME/.vim ];then
+    mkdir $HOME/.vim 
+fi
+if [ ! -d $HOME/.vim_plug ];then
+    mkdir $HOME/.vim_plug $HOME/.vim_plug/plugged
+fi
+cd $HOME/.vim
 echo "init git dir"
 git init
 echo "git config"
