@@ -1,23 +1,27 @@
 #! bin/bash
-dd if=/dev/zero of=/swapfile bs=2M count=8192 status=progress
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-swapoff /swapfile
-echo "/swapfile none    swap    defaults    0 0" >> /etc/fstab
+if [ ! -e /swapfile ];then
+    dd if=/dev/zero of=/swapfile bs=2M count=8192 status=progress
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    swapoff /swapfile
+    echo "/swapfile none    swap    defaults    0 0" >> /etc/fstab
+fi
 timedatectl set-timezone Asia/Shanghai
 hwclock --systohc
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "zh_CN.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-touch /etc/locale.conf
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+if  [ ! -d /etc/locale.conf ]
+    touch /etc/locale.conf
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+fi
 hostnamectl set-hostname arch
 echo -e "127.0.0.1  localhost\n::1      localhost\n127.0.1.1    arch.localdomain    arch" >> /etc/hosts
 echo '\n\n\n\n\n\n' | pacman -S grub efibootmgr networkmanager network-manager-applet dialog wireless_tools wpa_supplicant os-prober mtools dosfstools ntfs-3g base-devel linux-lts-headers reflector sudo
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Archlinux
 mkdir /mnt/win
-read -p "mount win sysdisk": windisk
+read -p "mount win sysdisk,if no windows input /nothing": windisk
 if [ $windisk == /nothing ];then
 else	
     mount $windisk /mnt/win
